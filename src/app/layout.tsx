@@ -9,7 +9,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        test khen
+        test bazi page
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
