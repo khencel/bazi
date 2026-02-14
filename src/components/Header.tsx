@@ -19,10 +19,10 @@ export default function Header(){
                         </a>
 
                         <nav className={styles.navlinks} aria-label="Primary">
-                        <a href="#services">Services</a>
-                        <a href="#how">How it works</a>
-                        <a href="#pricing">Packages</a>
-                        <a href="#faq">FAQ</a>
+                        <a href="#services">Home</a>
+                        <a href="#how">About Us</a>
+                        <a href="#pricing">Data Privacy</a>
+                        <a href="#faq">Copyright Notice</a>
                         </nav>
 
                         <div className={styles.navcta}>
