@@ -29,23 +29,24 @@ export default function Home() {
 
             <div className={styles["hero-card"]} aria-label="Preview card">
               <div className={styles["mock"]}>
-                <img src="/logo.png" className="img-fluid" alt="" />
+                {/* <img src="/logo.png" className="img-fluid" alt="" /> */}
                 {/* <div className={styles["mock-top"]}>
                   <div className={styles["badge"]}>Featured Reading</div>
                   <div className={styles["mini"]}>Element + Timing + Guidance</div>
-                </div>
+                </div> */}
 
                 <div className={styles["preview"]}>
-                  <div className={styles["preview-inner"]}>
-                    <div className={styles["preview-title"]}>
+                  <div>
+                    <img src="/logo.png" className="img-fluid" alt="" />
+                    {/* <div className={styles["preview-title"]}>
                       <div className={styles["ring"]}></div>
                       <div>
                         <div style={{fontWeight:"900"}}>BaZi Life Report</div>
                         <div className={styles["mini"]}>Your personal overview</div>
                       </div>
-                    </div>
+                    </div> */}
 
-                    <div className={styles["preview-grid"]}>
+                    {/* <div className={styles["preview-grid"]}>
                       <div className={styles["tile"]}>
                         <b>Elements</b>
                         <small>Balance, favorable elements</small>
@@ -62,11 +63,11 @@ export default function Home() {
                         <b>Love</b>
                         <small>Compatibility insights</small>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
-                <div className={styles["mini"]}>Tip: Replace this preview with your real logo / graphics later.</div> */}
+                {/* <div className={styles["mini"]}>Tip: Replace this preview with your real logo / graphics later.</div> */}
               </div>
             </div>
 
