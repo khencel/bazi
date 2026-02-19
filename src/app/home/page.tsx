@@ -219,7 +219,7 @@ export default function HomePage(){
                         <input type="time" />
                     </div> */}
                     <button className="btn primary">
-                        Plot Destiny Chart
+                        Plot Bazi Chart
                     </button>
                     </div>
 

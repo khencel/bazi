@@ -1,0 +1,320 @@
+.loginroot {
+    --bg: #07080b;
+    --card: #0e1016;
+    --text: #e9e6df;
+    --muted: #b9b4a8;
+    --gold1: #ffd58a;
+    --gold2: #d6a54a;
+    --ember: #ff6a2a;
+    --ember2: #ffb14a;
+    --line: rgba(255, 255, 255, .08);
+    --shadow: 0 18px 50px rgba(0, 0, 0, .55);
+    --radius: 18px;
+}
+
+
+
+.loginA {
+    color: inherit;
+    text-decoration: none
+}
+
+.container {
+    width: min(1100px, 92vw);
+    margin: 0 auto;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    padding: .95rem 1.1rem;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .03));
+    color: var(--text);
+    cursor: pointer;
+    transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    user-select: none;
+    font-weight: 700;
+    width: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    border-color: rgba(255, 213, 138, .35)
+}
+
+.btn.primary {
+    border: 1px solid rgba(255, 213, 138, .45);
+    background: linear-gradient(90deg, rgba(255, 213, 138, .25), rgba(255, 106, 42, .18));
+    box-shadow: 0 12px 30px rgba(255, 106, 42, .12);
+}
+
+
+
+
+/* LAYOUT */
+.loginMain {
+    min-height: calc(100vh - 78px);
+    display: grid;
+    place-items: center;
+    padding: 2rem 0;
+}
+
+.grid {
+    width: min(980px, 92vw);
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 1.2rem;
+    align-items: stretch;
+}
+
+.panel {
+    border-radius: calc(var(--radius) + 6px);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
+    border: 1px solid rgba(255, 255, 255, .10);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    position: relative;
+}
+
+.panel::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background:
+        radial-gradient(320px 260px at 25% 15%, rgba(255, 213, 138, .18), transparent 60%),
+        radial-gradient(360px 280px at 85% 20%, rgba(255, 106, 42, .14), transparent 60%),
+        radial-gradient(400px 320px at 50% 95%, rgba(255, 177, 74, .10), transparent 60%);
+    pointer-events: none;
+}
+
+/* LEFT - marketing */
+.left {
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-height: 520px;
+}
+
+.pill {
+    display: inline-flex;
+    gap: .5rem;
+    align-items: center;
+    padding: .4rem .7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 213, 138, .22);
+    background: rgba(255, 213, 138, .08);
+    color: var(--gold1);
+    font-size: .85rem;
+    letter-spacing: .2px;
+    width: fit-content;
+    position: relative;
+    z-index: 1;
+}
+
+.grad-text {
+    background: linear-gradient(90deg, var(--gold1), var(--gold2), var(--ember2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.left h2 {
+    position: relative;
+    z-index: 1;
+    margin: .3rem 0 .4rem;
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    line-height: 1.08;
+    letter-spacing: -.6px;
+}
+
+.left p {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    color: rgba(233, 230, 223, .78);
+    line-height: 1.65;
+    max-width: 55ch;
+}
+
+.feature {
+    position: relative;
+    z-index: 1;
+    margin-top: .6rem;
+    display: grid;
+    gap: .7rem;
+}
+
+.item {
+    display: flex;
+    gap: .7rem;
+    align-items: flex-start;
+    border: 1px solid rgba(255, 255, 255, .08);
+    background: rgba(255, 255, 255, .03);
+    border-radius: 16px;
+    padding: .85rem .9rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    margin-top: .25rem;
+    background: radial-gradient(circle at 30% 30%, var(--gold1), var(--ember));
+    box-shadow: 0 10px 25px rgba(255, 106, 42, .18);
+    flex: 0 0 auto;
+}
+
+.item b {
+    display: block;
+    margin-bottom: .2rem
+}
+
+.item small {
+    display: block;
+    color: rgba(233, 230, 223, .68);
+    line-height: 1.45
+}
+
+/* RIGHT - form */
+.right {
+    padding: 1.4rem;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .9rem;
+    min-height: 520px;
+}
+
+.card {
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, .10);
+    background: rgba(10, 12, 18, .55);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, .45);
+    padding: 1.2rem;
+}
+
+.card h3 {
+    margin: .1rem 0 .25rem;
+    font-size: 1.25rem
+}
+
+.card p {
+    margin: 0 0 1rem;
+    color: rgba(233, 230, 223, .72);
+    line-height: 1.5
+}
+
+.labelLogin {
+    display: block;
+    font-size: .9rem;
+    color: rgba(233, 230, 223, .85);
+    margin: .75rem 0 .35rem;
+    font-weight: 700;
+}
+
+.input {
+    width: 100%;
+    padding: .9rem .95rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, .10);
+    background: rgba(255, 255, 255, .03);
+    color: var(--text);
+    outline: none;
+    transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.input:focus {
+    border-color: rgba(255, 213, 138, .35);
+    box-shadow: 0 0 0 4px rgba(255, 213, 138, .08);
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .8rem;
+    margin-top: .75rem;
+    color: rgba(233, 230, 223, .75);
+    font-size: .9rem;
+}
+
+.row a {
+    color: rgba(255, 213, 138, .92);
+    font-weight: 800;
+}
+
+.row a:hover {
+    color: #ffe2b2
+}
+
+.hr {
+    height: 1px;
+    background: rgba(255, 255, 255, .08);
+    margin: 1rem 0;
+}
+
+.sub-actions {
+    display: flex;
+    gap: .7rem;
+    flex-wrap: wrap;
+}
+
+.sub-actions .btn {
+    width: auto;
+    flex: 1
+}
+
+.btn.ghost {
+    background: rgba(255, 255, 255, .03);
+    border: 1px solid rgba(255, 255, 255, .10);
+}
+
+.note {
+    margin: 0;
+    color: rgba(233, 230, 223, .6);
+    font-size: .85rem;
+    line-height: 1.5;
+}
+
+/* Password toggle */
+.pw-wrap {
+    position: relative
+}
+
+.toggle {
+    position: absolute;
+    top: 53.5%;
+    right: 50px;
+    transform: translateY(-50%);
+    border: 1px solid rgba(255, 255, 255, .10);
+    background: rgba(255, 255, 255, .04);
+    color: rgba(233, 230, 223, .85);
+    border-radius: 12px;
+    padding: .45rem .6rem;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: .8rem;
+}
+
+.toggle:hover {
+    border-color: rgba(255, 213, 138, .35)
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+    .grid {
+        grid-template-columns: 1fr
+    }
+
+    .left,
+    .right {
+        min-height: auto
+    }
+}

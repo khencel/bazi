@@ -1,6 +1,9 @@
 
+"use client";
+import { useRouter } from "next/navigation";
 
 export default function Header(){
+    const router = useRouter();
     return (
         <>
             <header>
@@ -18,15 +21,15 @@ export default function Header(){
                         </a>
 
                         <nav className="navlinks" aria-label="Primary">
-                        <a href="#services">Home</a>
+                        <a href="#services" onClick={() => router.push("/")}>Home</a>
                         <a href="#how">About Us</a>
                         <a href="#pricing">Data Privacy</a>
                         <a href="#faq">Copyright Notice</a>
                         </nav>
 
                         <div className="navcta">
-                        <a className="btn" href="#pricing">Sign In</a>
-                        <a className="btn primary" href="#book">Sign Up</a>
+                        <button className="btn"  onClick={() => router.push("/login")}>Sign In</button>
+                        <button className="btn primary"  onClick={() => router.push("/register")}>Sign Up</button>
                         </div>
                     </div>
                 </div>
