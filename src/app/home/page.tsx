@@ -163,25 +163,31 @@ export default function HomePage(){
                                     <p>Please wait while we align the heavenly stems and earthly branches.</p>
                                 </div>
                             ) : (
-                                <div className="row text-center">
-                                    <div className="col-md-3">
-                                        <div>
-                                            <div className={s["destiny-field"]}>
-                                                <label>Hour</label>
+
+                                <div className="row text-center justify-content-center">
+                                    {
+                                        form.time && (
+                                            <div className="col-3">
                                                 <div>
-                                                    <img src={dayMaster?.hour_atrology?.animal?.image} className="img-fluid" alt="" />
-                                                </div>
-                                                
-                                                <div className={s["lp-title"]}>{natal_hour[0]} <sup>({natal_hour[1]} {natal_hour[2]})</sup></div>
-                                                <div className={s["lp-title"]}>{natal_hour[3]} <sup>({natal_hour[5]} {natal_hour[6]})</sup></div>
-                                                <div className={s["lp-pill"]}>
-                                                    <span className={s["lp-code"]}>{natal_hour[4]}</span>
+                                                    <div className={s["destiny-field"]}>
+                                                        <label>Hour</label>
+                                                        <div>
+                                                            <img src={dayMaster?.hour_atrology?.animal?.image} className="img-fluid" alt="" />
+                                                        </div>
+                                                        
+                                                        <div className={s["lp-title"]}>{natal_hour[0]} <sup>({natal_hour[1]} {natal_hour[2]})</sup></div>
+                                                        <div className={s["lp-title"]}>{natal_hour[3]} <sup>({natal_hour[5]} {natal_hour[6]})</sup></div>
+                                                        <div className={s["lp-pill"]}>
+                                                            <span className={s["lp-code"]}>{natal_hour[4]}</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        )
+                                    }
+                                    
 
-                                    <div className="col-md-3">
+                                    <div className="col-3">
                                         <div>
                                             <div className={s["destiny-field"]}>
                                                 <label>Day</label>
@@ -197,7 +203,7 @@ export default function HomePage(){
                                         </div>
                                     </div>
 
-                                    <div className="col-md-3">
+                                    <div className="col-3">
                                         <div>
                                             <div className={s["destiny-field"]}>
                                                 <label>Month</label>
@@ -213,7 +219,7 @@ export default function HomePage(){
                                         </div>
                                     </div>
 
-                                    <div className="col-md-3">
+                                    <div className="col-3">
                                         <div>
                                             <div className={s["destiny-field"]}>
                                                 <label>Year</label>
