@@ -24,3 +24,15 @@ export const fetchMonthly = createAsyncThunk(
         }
     }
 )
+
+export const fetchDaily = createAsyncThunk(
+    "bazi/fetchDaily",
+    async (year: number, {rejectWithValue}) => {
+        try {
+            const res = await get_no_auth_api(`${process.env.NEXT_PUBLIC_QIMEN_URL_LOCAL_DAILY}${year}`)
+            return res.data
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+)

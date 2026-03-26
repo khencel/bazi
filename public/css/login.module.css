@@ -290,7 +290,7 @@
 
 .toggle {
     position: absolute;
-    top: 53.5%;
+    top: 55.6%;
     right: 50px;
     transform: translateY(-50%);
     border: 1px solid rgba(255, 255, 255, .10);
@@ -317,4 +317,19 @@
     .right {
         min-height: auto
     }
+}
+
+
+.mytoast {
+  border-radius: 12px !important;
+  background: #111827 !important;
+  color: rgba(255, 213, 138, .92);
+  padding: 14px 16px !important;
+  /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25) !important; */
+  border: 1px solid rgba(255, 255, 255, .10);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, .45) !important;
+}
+.myToastTitle {
+  font-size: 14px !important;
+  font-weight: 600 !important;
 }

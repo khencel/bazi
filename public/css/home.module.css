@@ -520,3 +520,10 @@
   0%{ background-position: 200% 0; }
   100%{ background-position: -200% 0; }
 }
+
+
+.lp-grid-daily{
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}

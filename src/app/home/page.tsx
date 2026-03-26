@@ -2,10 +2,13 @@
 
 import s from "../../../public/css/home.module.css"
 import {useEffect, useState } from "react";
-import GetGods from "@/utils/getGod";
-import { fetchBazi, fetchMonthly } from "@/redux/slices/bazi/baziThunk";
+import { fetchBazi, fetchMonthly, fetchDaily } from "@/redux/slices/bazi/baziThunk";
 import { useDispatch } from "react-redux";
-import { ConvertMonthIntoText, AnimalSign } from "@/utils/convertData";
+import Monthly from "./monthly";
+import Daily from "./daily";
+import html2canvas from "html2canvas";
+
+
 
 export default function HomePage(){
     const dispatch = useDispatch<any>();
@@ -15,6 +18,7 @@ export default function HomePage(){
         dob: "",
         time: ""
     });
+    const [outlook, setOutlook] = useState("monthly")
     const [dayMaster, setDayMaster] = useState<any>({})
     const [baziCardsFirst, setBaziCardsFirst] = useState<any[]>([])
     const [baziCardsSecond, setBaziCardsSecond] = useState<any[]>([])
@@ -23,7 +27,10 @@ export default function HomePage(){
     const [ natal_hour, setNatalHour] = useState<any[]>([])
     const [ natalMonth, setNatalMonth] = useState<any[]>([])
     const [ natalYear, setNatalYear] = useState<any[]>([])
+    const [dailyData, setDailyData] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
+    const [downloadLoading, setDownloadLoading] = useState(false) 
+    const [isPlot, setIsPlot] = useState(false)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
         const { name, value } = e.target;
@@ -61,22 +68,106 @@ export default function HomePage(){
             setNatalYear(year);
         } finally {
             setLoading(false);
+            setIsPlot(true);
+        }
+    };
+
+    const handleDownloadImage = async () => {
+        try {
+            setDownloadLoading(true);
+
+            const element = document.getElementById("daily-capture");
+            if (!element) return;
+
+            const canvas = await html2canvas(element, {
+                scale: 1,
+                useCORS: true,
+                backgroundColor: "#ffffff"
+            });
+
+            const image = canvas.toDataURL("image/png");
+
+            // download
+            const link = document.createElement("a");
+            link.href = image;
+            link.download = "daily-outlook.png";
+            link.click();
+
+            // print
+            const printWindow = window.open("", "_blank", "width=900,height=700");
+            if (!printWindow) return;
+
+            printWindow.document.open();
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Print</title>
+                    <style>
+                        @page {
+                            size: auto;
+                            margin: 0;
+                        }
+
+                        html, body {
+                            margin: 0;
+                            padding: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: #fff;
+                        }
+
+                        body {
+                            display: flex;
+                            justify-content: center;
+                            align-items: flex-start;
+                        }
+
+                        img {
+                            display: block;
+                            width: 100%;
+                            height: auto;
+                            page-break-inside: avoid;
+                            break-inside: avoid;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <img src="${image}" onload="window.print(); window.onafterprint = () => window.close();" />
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+
+        } catch (error) {
+            console.error("Download/Print failed:", error);
+        } finally {
+            setDownloadLoading(false);
         }
     };
 
 
     useEffect(() => {
-        dispatch(fetchMonthly(2026)).then((res: any) => {
+        const currentYear = new Date().getFullYear();
+        dispatch(fetchMonthly(currentYear)).then((res: any) => {
             setBaziCardsFirst(res.payload.first)
             setBaziCardsSecond(res.payload.second)
             setBaziCardNext(res.payload.nextYear)
         })
+       
     },[dispatch,])
+
+    useEffect(() => {
+        const currentYear = new Date().getFullYear();
+        dispatch(fetchDaily(currentYear)).then((res:any) => {
+            setDailyData(res.payload?.daily)
+        })
+    },[dispatch])
   
 
     return (
         <>
-        <div className="row p-4">
+        <div className="row p-4" id="daily-capture">
             <div className="col-12 col-lg-5 mb-4 mb-lg-0">
                 <section>
                     <div className={s["destiny-section"]}>
@@ -97,16 +188,16 @@ export default function HomePage(){
 
                                 {/* Gender */}
                                 <div className={s["destiny-field"]}>
-                                <label>Gender</label>
-                                <select
-                                    name="gender"
-                                    value={form.gender}
-                                    onChange={handleChange}
-                                >
-                                    <option value="">Select gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
+                                    <label>Gender</label>
+                                    <select
+                                        name="gender"
+                                        value={form.gender}
+                                        onChange={handleChange}
+                                    >
+                                        <option value="">Select gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
                                 </div>
 
                                 {/* Date of Birth */}
@@ -130,6 +221,7 @@ export default function HomePage(){
                                     onChange={handleChange}
                                 />
                                 </div>
+                                
 
                                 {/* Button */}
                                 <button
@@ -146,6 +238,42 @@ export default function HomePage(){
                                         "Plot Bazi Chart"
                                     )}
                                 </button>
+
+                                <div className={s["destiny-field"]}>
+                                    <label>Outlook</label>
+                                    <select
+                                        name="outlook"
+                                        value={outlook}
+                                        onChange={(e)=>setOutlook(e.target.value)}
+                                        disabled={isDisabled || loading}
+                                    >
+                                        <option value="monthly">Monthly</option>
+                                        <option value="daily">Daily</option>
+                                    </select>
+                                </div>
+                               
+                                {
+                                    isPlot && (
+                                        <button
+                                            className={`${s["plot-btn"]}`}
+                                            disabled={isDisabled}
+                                            onClick={handleDownloadImage}
+                                        >
+                                            {
+                                                downloadLoading ? (
+                                                    <span className={s["btn-loading"]}>
+                                                    <span className={s["spinner"]}></span>
+                                                    Downloading...
+                                                </span>
+                                                ):(
+                                                    "Download Result"
+                                                )
+                                            }
+                                        </button>
+                                    )
+                                }
+                                
+                               
                             </div>
                             <span className={s["destiny-glow"]}></span>
                         </div>
@@ -234,132 +362,24 @@ export default function HomePage(){
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             )}
                         </div>
                     </div>   
                 </section>
             </div>
+            {
+                outlook === "monthly" ? (
+                    <Monthly baziCardsFirst={baziCardsFirst} baziCardsSecond={baziCardsSecond} baziCardNext={baziCardNext} natal_day={natal_day}/>
+                ): (
+                    <Daily dailyData={dailyData} natal_day={natal_day}/>
+                )
+            }
             
         </div>
         
-            <section className={s["lp-wrap"]}>
-                <div className={s["lp-grid"]}>
-                    
-                    {baziCardsFirst.map((card, index) => (
-                        <article key={index} className={s["lp-card"]}>
-                            <div className={s["lp-top"]}>
-                            <div className={s["lp-date"]}>{ConvertMonthIntoText(card.month)}</div>
-                            <div className={s["lp-pill"]}>
-                                <span className={s["lp-ico"]}>🔒</span>
-                                <span className={s["lp-code"]}>{GetGods(natal_day[0],card.month_chart.stem.value)}</span>
-                            </div>
-                            </div>
-
-                            <div className={s["lp-mid"]}>
-                            <div className={s["lp-title"]}>{card.month_chart.stem.value}</div>
-                            <div className={s["lp-sub"]}>
-                                {/* {card.ratio}  */}
-                                {card.month_chart.stem.name}
-                            </div>
-                            </div>
-
-                            <div className={s["lp-bottom"]}>
-                            <div className={s["lp-row"]}>
-                                <span className={s["dot"]}></span>
-                                <span className={s["lp-small"]}>{card.month_chart.branch.name}</span>
-                                <span className={`${s["lp-small"]} ${s["muted"]}`}>|</span>
-                                <span className={s["lp-small"]}>{card.month_chart.element.name}</span>
-                            </div>
-
-                            <div className={s["lp-stats"]}>
-                                <span className={s["lp-stat"]}>
-                                    {AnimalSign(card.month_chart.english.name)} {card.month_chart.english.name}
-                                </span>
-                            </div>
-                            </div>
-
-                            <span className={s["lp-glow"]}></span>
-                        </article>
-                    ))}
-
-                    {baziCardNext.map((card, index) => (
-                        <article key={index} className={s["lp-card"]}>
-                            <div className={s["lp-top"]}>
-                            <div className={s["lp-date"]}>{ConvertMonthIntoText(card.month)} 5 2027</div>
-                            <div className={s["lp-pill"]}>
-                                <span className={s["lp-ico"]}>🔒</span>
-                                <span className={s["lp-code"]}>{GetGods(natal_day[0],card.month_chart.stem.value)}</span>
-                            </div>
-                            </div>
-
-                            <div className={s["lp-mid"]}>
-                            <div className={s["lp-title"]}>{card.month_chart.stem.value}</div>
-                            <div className={s["lp-sub"]}>
-                                {/* {card.ratio}  */}
-                                {card.month_chart.stem.name}
-                            </div>
-                            </div>
-
-                            <div className={s["lp-bottom"]}>
-                            <div className={s["lp-row"]}>
-                                <span className={s["dot"]}></span>
-                                <span className={s["lp-small"]}>{card.month_chart.branch.name}</span>
-                                <span className={`${s["lp-small"]} ${s["muted"]}`}>|</span>
-                                <span className={s["lp-small"]}>{card.month_chart.element.name}</span>
-                            </div>
-
-                            <div className={s["lp-stats"]}>
-                                <span className={s["lp-stat"]}>
-                                    {AnimalSign(card.month_chart.english.name)} {card.month_chart.english.name}
-                                </span>
-                            </div>
-                            </div>
-
-                            <span className={s["lp-glow"]}></span>
-                        </article>
-                    ))}
-
-                    {baziCardsSecond.map((card, index) => (
-                        <article key={index} className={s["lp-card"]}>
-                            <div className={s["lp-top"]}>
-                            <div className={s["lp-date"]}>{ConvertMonthIntoText(card.month)}</div>
-                            <div className={s["lp-pill"]}>
-                                <span className={s["lp-ico"]}>🔒</span>
-                                <span className={s["lp-code"]}>{GetGods(natal_day[0],card.month_chart.stem.value)}</span>
-                            </div>
-                            </div>
-
-                            <div className={s["lp-mid"]}>
-                            <div className={s["lp-title"]}>{card.month_chart.stem.value}</div>
-                            <div className={s["lp-sub"]}>
-                                {/* {card.ratio}  */}
-                                {card.month_chart.stem.name}
-                            </div>
-                            </div>
-
-                            <div className={s["lp-bottom"]}>
-                            <div className={s["lp-row"]}>
-                                <span className={s["dot"]}></span>
-                                <span className={s["lp-small"]}>{card.month_chart.branch.name}</span>
-                                <span className={`${s["lp-small"]} ${s["muted"]}`}>|</span>
-                                <span className={s["lp-small"]}>{card.month_chart.element.name}</span>
-                            </div>
-
-                            <div className={s["lp-stats"]}>
-                                <span className={s["lp-stat"]}>
-                                    {AnimalSign(card.month_chart.english.name)} {card.month_chart.english.name}
-                                </span>
-                            </div>
-                            </div>
-
-                            <span className={s["lp-glow"]}></span>
-                        </article>
-                    ))}
-
-                    
-                </div>
-            </section>
+            
         </>
     )
 }
