@@ -172,35 +172,40 @@ export default function HomePage(){
                 <section>
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]}>
-
-                            <div className={s["destiny-grid"]}>
-                                {/* Name */}
-                                <div className={s["destiny-field"]}>
-                                <label>Name</label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder="Enter your name"
-                                    value={form.name}
-                                    onChange={handleChange}
-                                />
-                                </div>
-
-                                {/* Gender */}
-                                <div className={s["destiny-field"]}>
-                                    <label>Gender</label>
-                                    <select
-                                        name="gender"
-                                        value={form.gender}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">Select gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
+                            
+                            {/* <div className={s["destiny-grid"]}> */}
 
                                 <div className="row">
+                                    <div className="col">
+                                        <div className={s["destiny-field"]}>
+                                            <label>Name</label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                placeholder="Enter your name"
+                                                value={form.name}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col">
+                                        {/* Gender */}
+                                        <div className={s["destiny-field"]}>
+                                            <label>Gender</label>
+                                            <select
+                                                name="gender"
+                                                value={form.gender}
+                                                onChange={handleChange}
+                                            >
+                                                <option value="">Select gender</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div className="row mt-3">
                                     <div className="col">
                                         <div className={s["destiny-field"]}>
                                             <label>Date of Birth</label>
@@ -224,6 +229,23 @@ export default function HomePage(){
                                         </div>
                                     </div>
                                 </div>
+
+                                <div className="row mt-3 mb-3">
+                                    <div className="col">
+                                        <div className={s["destiny-field"]}>
+                                            <label>Outlook</label>
+                                            <select
+                                                name="outlook"
+                                                value={outlook}
+                                                onChange={(e)=>setOutlook(e.target.value)}
+                                                disabled={isDisabled || loading}
+                                            >
+                                                <option value="monthly">Monthly</option>
+                                                <option value="daily">Daily</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 {/* Button */}
                                 <button
                                     className={`${s["plot-btn"]} ${loading ? s["loading-btn"] : ""}`}
@@ -240,18 +262,7 @@ export default function HomePage(){
                                     )}
                                 </button>
 
-                                <div className={s["destiny-field"]}>
-                                    <label>Outlook</label>
-                                    <select
-                                        name="outlook"
-                                        value={outlook}
-                                        onChange={(e)=>setOutlook(e.target.value)}
-                                        disabled={isDisabled || loading}
-                                    >
-                                        <option value="monthly">Monthly</option>
-                                        <option value="daily">Daily</option>
-                                    </select>
-                                </div>
+                                
                                
                                 {
                                     isPlot && (
@@ -275,7 +286,7 @@ export default function HomePage(){
                                 }
                                 
                                
-                            </div>
+                            {/* </div> */}
                             <span className={s["destiny-glow"]}></span>
                         </div>
                     </div>
