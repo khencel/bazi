@@ -527,13 +527,3 @@
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
 }
-
-
-/* Fix Safari input styles */
-.tob,
-.dob {
-  -webkit-appearance: none;
-  appearance: none;
-  min-height: 44px;
-}
-

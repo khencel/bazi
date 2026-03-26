@@ -201,10 +201,18 @@ export default function HomePage(){
                                 </div>
                                 <div className="row">
                                     <div className="col">
-                                        <input type="date" className="form-control" />
+                                        <div className={s["destiny-field"]}>
+                                            <label>Date of Birth</label>
+                                            <input type="date" className="form-control" />
+                                        </div>
+                                        
                                     </div>
                                     <div className="col">
-                                        <input type="time" className="form-control" />
+                                        <div className={s["destiny-field"]}>
+                                            <label>Date of Birth</label>
+                                            <input type="time" className="form-control" />
+                                        </div>
+                                        
                                     </div>
                                 </div>
 

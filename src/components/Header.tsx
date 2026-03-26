@@ -21,7 +21,7 @@ export default function Header() {
                         </div>
                         <div>
                             <h1>BaZi Life Analysis</h1>
-                            <span>by Jennel Chengs</span>
+                            <span>by Jennel Cheng</span>
                         </div>
                     </a>
 
