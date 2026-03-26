@@ -188,7 +188,7 @@ export default function HomePage(){
 
                                 {/* Gender */}
                                 <div className={s["destiny-field"]}>
-                                    <label>Gender</label>
+                                    <label>Genders</label>
                                     <select
                                         name="gender"
                                         value={form.gender}
