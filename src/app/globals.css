@@ -19,10 +19,6 @@ body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
   color:var(--text);
-  /* background: radial-gradient(1200px 800px at 15% 10%, rgba(255,106,42,.18), transparent 60%),
-              radial-gradient(900px 700px at 90% 15%, rgba(255,213,138,.14), transparent 55%),
-              radial-gradient(900px 700px at 50% 95%, rgba(255,177,74,.10), transparent 55%),
-              var(--bg); */
   background-image: url('../../public/home.png');
   background-size: cover;
   background-position: center;
@@ -33,8 +29,11 @@ body{
 
 a{color:inherit;text-decoration:none}
 .container{width:min(1120px, 92vw); margin:0 auto;}
+
 .btn{
-  display:inline-flex; align-items:center; justify-content:center;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
   gap:.6rem;
   padding:.95rem 1.1rem;
   border-radius:14px;
@@ -52,29 +51,18 @@ a{color:inherit;text-decoration:none}
   background: linear-gradient(90deg, rgba(255,213,138,.25), rgba(255,106,42,.18));
   box-shadow: 0 12px 30px rgba(255,106,42,.12);
 }
-.pill{
-  display:inline-flex; gap:.5rem; align-items:center;
-  padding:.4rem .7rem;
-  border-radius:999px;
-  border:1px solid rgba(255,213,138,.22);
-  background: rgba(255,213,138,.08);
-  color: var(--gold1);
-  font-size:.85rem;
-  letter-spacing:.2px;
-}
 
-/* NAV */
 header{
-  /* position:sticky;  */
-  top:0; 
-  z-index:10;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
   backdrop-filter: blur(10px);
-  background: linear-gradient(180deg, rgba(7,8,11,.75), rgba(7,8,11,.25));
+  background: linear-gradient(180deg, rgba(7,8,11,.92), rgba(7,8,11,.75));
   border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 section {
-  padding: 2.2rem 0
+  padding: 2.2rem 0;
 }
 
 ul {
@@ -91,12 +79,14 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, .06);
   margin-top: 2.2rem;
 }
+
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: .9rem 0;
   gap: 1rem;
+  position: relative;
 }
 
 .brand {
@@ -107,8 +97,8 @@ footer {
 }
 
 .logo {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border-radius: 14px;
   background:
     radial-gradient(18px 18px at 30% 30%, rgba(255, 213, 138, .8), transparent 60%),
@@ -116,6 +106,13 @@ footer {
     linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02));
   border: 1px solid rgba(255, 213, 138, .25);
   box-shadow: 0 16px 35px rgba(0, 0, 0, .35);
+  overflow: hidden;
+}
+
+.logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .brand h1 {
@@ -128,7 +125,13 @@ footer {
   display: block;
   margin-top: .12rem;
   font-size: .78rem;
-  color: var(--muted)
+  color: var(--muted);
+}
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap: 1rem;
 }
 
 .navlinks {
@@ -155,5 +158,104 @@ footer {
 .navcta {
   display: flex;
   gap: .7rem;
-  align-items: center
+  align-items: center;
+}
+
+.menu-toggle{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  width:44px;
+  height:44px;
+  border:1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.04);
+  border-radius:12px;
+  cursor:pointer;
+  padding:0 10px;
+}
+
+.menu-toggle span{
+  display:block;
+  width:100%;
+  height:2px;
+  background: var(--text);
+  border-radius:999px;
+}
+
+/* MOBILE */
+@media (max-width: 991px){
+  .menu-toggle{
+    display:flex;
+  }
+
+  .nav-right{
+    display:none;
+    position:absolute;
+    top:100%;
+    right:0;
+    width:100%;
+    margin-top:.8rem;
+    padding:1rem;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    background: rgba(11,13,18,.96);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,.35);
+    flex-direction:column;
+    align-items:stretch;
+    z-index:10000;
+  }
+
+  .nav-right.open{
+    display:flex;
+  }
+
+  .navlinks{
+    flex-direction:column;
+    align-items:stretch;
+    gap:.35rem;
+    width:100%;
+  }
+
+  .navlinks a{
+    width:100%;
+    padding:.9rem 1rem;
+    background: rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.06);
+  }
+
+  .navcta{
+    width:100%;
+    flex-direction:column;
+    margin-top:.7rem;
+  }
+
+  .navcta .btn{
+    width:100%;
+  }
+}
+
+@media (max-width: 575px){
+  .brand{
+    min-width: unset;
+    max-width: calc(100% - 60px);
+  }
+
+  .logo{
+    width:56px;
+    height:56px;
+  }
+
+  .brand h1{
+    font-size:.9rem;
+  }
+
+  .brand span{
+    font-size:.72rem;
+  }
+
+  .nav{
+    padding:.8rem 0;
+  }
 }
