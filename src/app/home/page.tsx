@@ -204,7 +204,7 @@ export default function HomePage(){
                                 <div className={s["destiny-field"]}>
                                     <label>Date of Birth</label>
                                     <input
-                                    className="dob"
+                                    className="form-control"
                                         type="date"
                                         name="dob" 
                                         value={form.dob}
