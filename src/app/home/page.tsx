@@ -205,7 +205,7 @@ export default function HomePage(){
                                 <label>Date of Birth</label>
                                 <input
                                     type="date"
-                                    name="dob"
+                                    name="dob" 
                                     value={form.dob}
                                     onChange={handleChange}
                                 />
