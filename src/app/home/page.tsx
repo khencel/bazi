@@ -200,29 +200,30 @@ export default function HomePage(){
                                     </select>
                                 </div>
 
-                                {/* Date of Birth */}
-                                <div className={s["destiny-field"]}>
-                                    <label>Date of Birth</label>
-                                    <input
-                                        type="date"
-                                        name="dob" 
-                                        value={form.dob}
-                                        onChange={handleChange}
-                                    />
+                                <div className="row">
+                                    <div className="col">
+                                        <div className={s["destiny-field"]}>
+                                            <label>Date of Birth</label>
+                                            <input
+                                                type="date"
+                                                name="dob" 
+                                                value={form.dob}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col">
+                                        <div className={s["destiny-field"]}>
+                                            <label>Time of Birth</label>
+                                            <input
+                                                type="time"
+                                                name="time"
+                                                value={form.time}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-
-                                {/* Time */}
-                                <div className={s["destiny-field"]}>
-                                <label>Time of Birth</label>
-                                <input
-                                    type="time"
-                                    name="time"
-                                    value={form.time}
-                                    onChange={handleChange}
-                                />
-                                </div>
-                                
-
                                 {/* Button */}
                                 <button
                                     className={`${s["plot-btn"]} ${loading ? s["loading-btn"] : ""}`}
