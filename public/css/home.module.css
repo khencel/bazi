@@ -320,9 +320,9 @@
   }
 
   .destiny-field input,
-  .destiny-field select {
-    font-size: 13px;
-    padding: 0 10px;
+  .destiny-field select{
+    height: 42px;
+    font-size: 14px;
   }
 
   .destiny-btn{
@@ -353,11 +353,6 @@
   .destiny-card{
     padding: 16px 12px;
   }
-  .destiny-field input,
-  .destiny-field select {
-    font-size: 13px;
-    padding: 0 10px;
-  }
 }
 
 /* ===== EXTRA SMALL ===== */
@@ -378,9 +373,8 @@
   }
 
   .destiny-field input,
-  .destiny-field select {
-    font-size: 13px;
-    padding: 0 10px;
+  .destiny-field select{
+    padding: 0 12px;
   }
 }
 
@@ -533,3 +527,13 @@
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
 }
+
+
+/* Fix Safari input styles */
+.tob,
+.dob {
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 44px;
+}
+
