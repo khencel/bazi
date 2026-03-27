@@ -1,19 +1,28 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname  } from "next/navigation";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { alertPopup } from "./Toaster";
 
 export default function Header() {
     const router = useRouter();
+    const pathname = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
     const [hasToken, setHasToken] = useState(false);
+    const [user, setUser] = useState<any>(null)
 
     useEffect(() => {
-        const token = Cookies.get("access"); // palitan mo kung iba name ng cookie mo
+        const token = Cookies.get("access");
+        const userCookie = Cookies.get("user")
         setHasToken(!!token);
-    }, []);
+        if (userCookie) {
+            setUser(JSON.parse(userCookie));
+        } else {
+            setUser(null);
+        }
+        
+    }, [pathname]);
 
     const goTo = (path: string) => {
         router.push(path);
@@ -26,7 +35,11 @@ export default function Header() {
             text: "You will be logged out!",
             confirmText: "Yes, logout",
             onConfirm: async () => {
-                
+                Cookies.remove("access",{path: "/"})
+                Cookies.remove("user", { path: "/" });
+                setHasToken(false);
+                setMenuOpen(false);
+                router.push("/");
             }
         });
     }
@@ -71,7 +84,7 @@ export default function Header() {
                         <div className="navcta">
                             {hasToken ? (
                                 <>
-                                    <a href="#" onClick={() => goTo("/")}>Khenneth Alaiza</a>
+                                    <a href="#" className="text-capitalize" onClick={() => goTo("/home")}>{user.first_name} {user.last_name}</a>
                                     <button
                                         className="btn primary"
                                         onClick={handleLogout}

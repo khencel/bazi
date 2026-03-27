@@ -41,6 +41,13 @@ export default function LoginPage() {
                 sameSite: "Strict",
                 secure: process.env.NODE_ENV === "production",
             });
+
+            Cookies.set("user", JSON.stringify(res.user), {
+                expires: 7,
+                path: "/",
+                sameSite: "Strict",
+                secure: process.env.NODE_ENV === "production",
+            })
             
             setLoading(false)
             router.push("/home")
