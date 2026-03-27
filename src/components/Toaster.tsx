@@ -73,7 +73,7 @@ export const showToast = (
 ) => {
   Swal.fire({
     toast: true,
-    position: "top-end",
+    position: "bottom-end",
     icon,
     title: message,
     text: text,
