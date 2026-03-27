@@ -208,7 +208,7 @@ export default function HomePage(){
                                 <div className="row mt-3">
                                     <div className="col-12 col-md-6">
                                         <div className={s["destiny-field"]}>
-                                            <label htmlFor="dob">Date of Births</label>
+                                            <label htmlFor="dob">Date of Birth</label>
                                             <input
                                                 id="dob"
                                                 type="date"

@@ -532,7 +532,28 @@
 .destiny-field input[type="time"] {
   width: 100%;
   min-width: 0;
-  font-size: 16px;
+  font-size: 16px; /* iwas zoom sa iPhone/Safari */
   line-height: 1.2;
+  -webkit-appearance: none;
+  appearance: none;
   box-sizing: border-box;
+}
+
+.destiny-field input[type="date"]::-webkit-date-and-time-value,
+.destiny-field input[type="time"]::-webkit-date-and-time-value {
+  text-align: left;
+}
+
+.destiny-field input[type="date"]::-webkit-calendar-picker-indicator,
+.destiny-field input[type="time"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .destiny-field input[type="date"],
+  .destiny-field input[type="time"] {
+    height: 46px;
+    font-size: 16px;
+  }
 }
