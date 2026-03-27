@@ -206,21 +206,24 @@ export default function HomePage(){
                                 </div>
                                 
                                 <div className="row mt-3">
-                                    <div className="col">
+                                    <div className="col-12 col-md-6">
                                         <div className={s["destiny-field"]}>
-                                            <label>Date of Birth</label>
+                                            <label htmlFor="dob">Date of Births</label>
                                             <input
+                                                id="dob"
                                                 type="date"
-                                                name="dob" 
+                                                name="dob"
                                                 value={form.dob}
                                                 onChange={handleChange}
                                             />
                                         </div>
                                     </div>
-                                    <div className="col">
+
+                                    <div className="col-12 col-md-6 mt-3 mt-md-0">
                                         <div className={s["destiny-field"]}>
-                                            <label>Time of Birth</label>
+                                            <label htmlFor="time">Time of Birth</label>
                                             <input
+                                                id="time"
                                                 type="time"
                                                 name="time"
                                                 value={form.time}
@@ -246,21 +249,26 @@ export default function HomePage(){
                                         </div>
                                     </div>
                                 </div>
-                                {/* Button */}
-                                <button
-                                    className={`${s["plot-btn"]} ${loading ? s["loading-btn"] : ""}`}
-                                    disabled={isDisabled || loading}
-                                    onClick={handlePlot}
-                                >
-                                    {loading ? (
-                                        <span className={s["btn-loading"]}>
-                                            <span className={s["spinner"]}></span>
-                                            Plotting Destiny...
-                                        </span>
-                                    ) : (
-                                        "Plot Bazi Chart"
-                                    )}
-                                </button>
+                                <div className="row mb-3">
+                                    <div className="col">
+                                        {/* Button */}
+                                        <button
+                                            className={`${s["plot-btn"]} ${loading ? s["loading-btn"] : ""}`}
+                                            disabled={isDisabled || loading}
+                                            onClick={handlePlot}
+                                        >
+                                            {loading ? (
+                                                <span className={s["btn-loading"]}>
+                                                    <span className={s["spinner"]}></span>
+                                                    Plotting Destiny...
+                                                </span>
+                                            ) : (
+                                                "Plot Bazi Chart"
+                                            )}
+                                        </button>
+                                    </div>
+                                </div>
+                                
 
                                 
                                

@@ -527,3 +527,12 @@
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
 }
+
+.destiny-field input[type="date"],
+.destiny-field input[type="time"] {
+  width: 100%;
+  min-width: 0;
+  font-size: 16px;
+  line-height: 1.2;
+  box-sizing: border-box;
+}
