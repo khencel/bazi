@@ -7,7 +7,8 @@ import { useDispatch } from "react-redux";
 import Monthly from "./monthly";
 import Daily from "./daily";
 import html2canvas from "html2canvas";
-
+import { GetAllGods } from "@/utils/getGod";
+import {convertInitailLetter} from "@/utils/convertData";
 
 
 export default function HomePage(){
@@ -31,6 +32,7 @@ export default function HomePage(){
     const [loading, setLoading] = useState(false)
     const [downloadLoading, setDownloadLoading] = useState(false) 
     const [isPlot, setIsPlot] = useState(false)
+    const [selectedGod , setSelectedGod] = useState("")
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
         const { name, value } = e.target;
@@ -146,6 +148,12 @@ export default function HomePage(){
         }
     };
 
+    const handleChangeGod = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+        setSelectedGod(value);
+        console.log(value);
+    }
+
 
     useEffect(() => {
         const currentYear = new Date().getFullYear();
@@ -250,7 +258,7 @@ export default function HomePage(){
                                     </div>
                                 </div>
                                 <div className="row mb-3">
-                                    <div className="col">
+                                    <div className="col-md-6">
                                         {/* Button */}
                                         <button
                                             className={`${s["plot-btn"]} ${loading ? s["loading-btn"] : ""}`}
@@ -267,31 +275,54 @@ export default function HomePage(){
                                             )}
                                         </button>
                                     </div>
-                                </div>
                                 
-
                                 
-                               
                                 {
                                     isPlot && (
-                                        <button
-                                            className={`${s["plot-btn"]}`}
-                                            disabled={isDisabled}
-                                            onClick={handleDownloadImage}
-                                        >
-                                            {
-                                                downloadLoading ? (
-                                                    <span className={s["btn-loading"]}>
-                                                    <span className={s["spinner"]}></span>
-                                                    Downloading...
-                                                </span>
-                                                ):(
-                                                    "Download Result"
-                                                )
-                                            }
-                                        </button>
+                                        <div className="col-md-6">
+                                            <button
+                                                className={`${s["plot-btn"]}`}
+                                                disabled={isDisabled}
+                                                onClick={handleDownloadImage}
+                                            >
+                                                {
+                                                    downloadLoading ? (
+                                                        <span className={s["btn-loading"]}>
+                                                        <span className={s["spinner"]}></span>
+                                                        Downloading...
+                                                    </span>
+                                                    ):(
+                                                        "Download Result"
+                                                    )
+                                                }
+                                            </button>
+                                        </div>
                                     )
                                 }
+                                </div>
+                                <div className="row">
+                                    <div className="col">
+                                        
+                                        <div className={s["destiny-field"]}>
+                                            <label>The 10 Gods</label>
+                                            <select
+                                                name="gods"
+                                                value={selectedGod}
+                                                onChange={handleChangeGod}
+                                                disabled={isDisabled || loading}
+                                            >
+                                                <option value="">Selected God</option>
+                                                {   
+                                                    
+                                                    GetAllGods().map((god, index) => (
+                                                        <option key={index} value={convertInitailLetter(god)}>{god}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
                                 
                                
                             {/* </div> */}
@@ -393,7 +424,7 @@ export default function HomePage(){
                 outlook === "monthly" ? (
                     <Monthly baziCardsFirst={baziCardsFirst} baziCardsSecond={baziCardsSecond} baziCardNext={baziCardNext} natal_day={natal_day}/>
                 ): (
-                    <Daily dailyData={dailyData} natal_day={natal_day}/>
+                    <Daily dailyData={dailyData} natal_day={natal_day} selectedGod={selectedGod}/>
                 )
             }
             

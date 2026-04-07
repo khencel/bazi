@@ -139,3 +139,7 @@ const godsMap: Record<string, string> = {
 export default function GetGods(day_master_stem: string, heavenly_stem: string) {
   return godsMap[`${day_master_stem}_${heavenly_stem}`] ?? null;
 }
+
+export function GetAllGods() {
+  return gods;
+}

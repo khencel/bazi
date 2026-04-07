@@ -5,9 +5,11 @@ import MonthTemplate from "./monthTemplate";
 interface DailyProps {
     dailyData: any[];   
     natal_day: any[];
+    
+    selectedGod: string;
 }
 
-export default function Daily({dailyData, natal_day}: DailyProps){
+export default function Daily({dailyData, natal_day, selectedGod}: DailyProps){
     const januaryData = dailyData.filter((card) => {
         return card.month === 1;
     });
@@ -51,84 +53,84 @@ export default function Daily({dailyData, natal_day}: DailyProps){
                 <div className="col-md-6">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]} style={{padding:"5px"}}>
-                            <MonthTemplate monthData={januaryData} natal_day={natal_day} label="January" />
+                            <MonthTemplate monthData={januaryData} natal_day={natal_day} label="January" selectedGod={selectedGod} />
                         </div>
                     </div>  
                 </div>
                 <div className="col-md-6">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]} style={{padding:"5px"}}>
-                            <MonthTemplate monthData={febData} natal_day={natal_day} label="February" />
+                            <MonthTemplate monthData={febData} natal_day={natal_day} label="February"  selectedGod={selectedGod}/>
                         </div>
                     </div>  
                 </div>
                 <div className="col-md-6">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]} style={{padding:"5px"}}>
-                            <MonthTemplate monthData={marchData} natal_day={natal_day} label="March" />
+                            <MonthTemplate monthData={marchData} natal_day={natal_day} label="March" selectedGod={selectedGod} />
                         </div>
                     </div>  
                 </div>
                 <div className="col-md-6">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]} style={{padding:"5px"}}>
-                            <MonthTemplate monthData={aprilData} natal_day={natal_day} label="April" />
+                            <MonthTemplate monthData={aprilData} natal_day={natal_day} label="April" selectedGod={selectedGod} />
                         </div>
                     </div>  
                 </div>
                 <div className="col-md-6">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]} style={{padding:"5px"}}>
-                            <MonthTemplate monthData={mayData} natal_day={natal_day} label="May" />
+                            <MonthTemplate monthData={mayData} natal_day={natal_day} label="May" selectedGod={selectedGod} />
                         </div>
                     </div>  
                 </div>
                 <div className="col-md-6">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]} style={{padding:"5px"}}>
-                            <MonthTemplate monthData={juneData} natal_day={natal_day} label="June" />
+                            <MonthTemplate monthData={juneData} natal_day={natal_day} label="June" selectedGod={selectedGod} />
                         </div>
                     </div>  
                 </div>
                 <div className="col-md-6">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]} style={{padding:"5px"}}>
-                            <MonthTemplate monthData={julyData} natal_day={natal_day} label="July" />
+                            <MonthTemplate monthData={julyData} natal_day={natal_day} label="July" selectedGod={selectedGod} />
                         </div>
                     </div>  
                 </div>
                 <div className="col-md-6">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]} style={{padding:"5px"}}>
-                            <MonthTemplate monthData={augustData} natal_day={natal_day} label="August" />
+                            <MonthTemplate monthData={augustData} natal_day={natal_day} label="August" selectedGod={selectedGod} />
                         </div>
                     </div>  
                 </div>
                 <div className="col-md-6">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]} style={{padding:"5px"}}>
-                            <MonthTemplate monthData={septemberData} natal_day={natal_day} label="September" />
+                            <MonthTemplate monthData={septemberData} natal_day={natal_day} label="September" selectedGod={selectedGod} />
                         </div>
                     </div>  
                 </div>
                 <div className="col-md-6">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]} style={{padding:"5px"}}>
-                            <MonthTemplate monthData={octoberData} natal_day={natal_day} label="October" />
+                            <MonthTemplate monthData={octoberData} natal_day={natal_day} label="October" selectedGod={selectedGod} />
                         </div>
                     </div>  
                 </div>
                 <div className="col-md-6">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]} style={{padding:"5px"}}>
-                            <MonthTemplate monthData={novemberData} natal_day={natal_day} label="November" />
+                            <MonthTemplate monthData={novemberData} natal_day={natal_day} label="November" selectedGod={selectedGod} />
                         </div>
                     </div>  
                 </div>
                 <div className="col-md-6">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]} style={{padding:"5px"}}>
-                            <MonthTemplate monthData={decemberData} natal_day={natal_day} label="December" />
+                            <MonthTemplate monthData={decemberData} natal_day={natal_day} label="December" selectedGod={selectedGod} />
                         </div>
                     </div>  
                 </div>
