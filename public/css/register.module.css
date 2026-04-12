@@ -239,7 +239,7 @@
 .toggleLeft{
     position:absolute; 
     left:35%; 
-    top:57.5%;
+    top:53.1%;
     transform: translateY(-50%);
     border:1px solid rgba(255,255,255,.10);
     background: rgba(255,255,255,.04);
@@ -254,7 +254,7 @@
 .toggleRight{
     position:absolute; 
     right:49px; 
-    top:57.5%;
+    top:53.1%;
     transform: translateY(-50%);
     border:1px solid rgba(255,255,255,.10);
     background: rgba(255,255,255,.04);
@@ -282,4 +282,30 @@
     .grid{grid-template-columns: 1fr}
     .left,.right{min-height:auto}
     .two{grid-template-columns: 1fr}
+}
+
+@media (max-width: 600px){
+    .regmain { padding: 1rem; }
+    .grid { gap: 1rem; }
+    .panel { border-radius: calc(var(--radius)/1.2); padding: 1rem; }
+    .left, .right { padding: 1rem; }
+    .pill { font-size: 0.75rem; padding: 0.3rem 0.5rem; }
+    .left h2 { font-size: clamp(1.4rem, 5vw, 2rem); }
+    .bullet { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+    .check { margin-top: 0; }
+    .input { padding: 0.75rem; font-size: 0.9rem; }
+    .pw-wrap button { font-size: 0.75rem; padding: 0.35rem 0.5rem; }
+    .row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+}
+
+@media (max-width: 500px){
+    .card h3 { font-size: 1.1rem; }
+    .card p { font-size: 0.85rem; }
+    .hint { font-size: 0.78rem; }
+    .btn { padding: 0.85rem; font-size: 0.9rem; }
+}
+
+@media (max-width: 500px){
+    .toggleLeft { left: auto; right: 10px; top: 50%; transform: translateY(-50%); }
+    .toggleRight { right: 10px; top: 50%; transform: translateY(-50%); }
 }

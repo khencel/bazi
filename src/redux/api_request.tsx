@@ -57,3 +57,5 @@ export async function standard_delete_api (url: string){
         }
     });
 }
+
+
