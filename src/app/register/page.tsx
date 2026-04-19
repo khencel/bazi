@@ -4,9 +4,14 @@ import s from '../../../public/css/register.module.css';
 import { post_no_auth_api } from "@/redux/api_request";
 import { useDispatch } from "react-redux";
 import { registerUser } from "@/redux/slices/auth/authThunk";
+import { alertPopup } from "@/components/Toaster";
+import { useRouter, usePathname  } from "next/navigation";
+import { showToast } from "@/components/Toaster";
+
 
 export default function RegistrationPage() {
   const dispatch = useDispatch<any>();
+  const router = useRouter();
   const [form, setForm] = useState({
     first_name: "",
     last_name: "",
@@ -26,40 +31,52 @@ export default function RegistrationPage() {
   };
 
   const validate = () => {
-    const errs: string[] = [];
+    const errors: string[] = [];
 
-    if (!form.first_name.trim()) errs.push("First name is required.");
-    if (!form.last_name.trim()) errs.push("Last name is required.");
+    if (!form.first_name.trim()) errors.push("First name is required.");
+    if (!form.last_name.trim()) errors.push("Last name is required.");
 
-    if (!form.email) errs.push("Email is required.");
-    else if (!/\S+@\S+\.\S+/.test(form.email)) errs.push("Email format is invalid.");
+    if (!form.email.trim()) errors.push("Email is required.");
+    else if (!/\S+@\S+\.\S+/.test(form.email)) errors.push("Email format is invalid.");
 
-    if (!form.password) errs.push("Password is required.");
-    else if (form.password.length < 8) errs.push("Password must be at least 8 characters.");
+    if (!form.password) errors.push("Password is required.");
+    else if (form.password.length < 8) errors.push("Password must be at least 8 characters.");
 
-    if (!form.password_confirmation) errs.push("Confirm password is required.");
-    else if (form.password !== form.password_confirmation) errs.push("Passwords do not match.");
+    if (!form.password_confirmation) errors.push("Confirm password is required.");
+    else if (form.password !== form.password_confirmation) errors.push("Passwords do not match.");
 
-    if (!form.terms) errs.push("You must accept the Terms and Privacy Policy.");
+    if (!form.terms) errors.push("You must accept the Terms and Privacy Policy.");
 
-    return errs;
+    if (errors.length > 0) {
+      showToast("Register", errors.join("\n"), "error");
+      return false;
+    }
+
+    return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const errors = validate();
-    if (errors.length > 0) {
-      alert(errors.join("\n")); 
-    } else {
-      alert("Registration successful! You can connect to backend now.");
-      // TODO: send `form` to your API
-      const res = await dispatch(registerUser(form));
-      if (res) {
-          alert("Registration successful! You can now log in."); 
-      } else {
-          alert("Registration failed. Please try again."); 
-      }
-    }
+
+    const isValid = validate();
+
+    if (!isValid) return;
+
+    alertPopup({
+      title: "Register",
+      text: "Are you sure, you want to register this email?",
+      confirmText: "Yes, Sign Up",
+      onConfirm: async () => {
+        const res = await dispatch(registerUser(form));
+
+        if (registerUser.fulfilled.match(res)) {
+          showToast("Register", "Registration successful", "success");
+          router.push("/login");
+        } else {
+          showToast("Register", "Registration failed. Please try again", "error");
+        }
+      },
+    });
   };
 
   return (
@@ -207,7 +224,7 @@ export default function RegistrationPage() {
                       style={{ accentColor: "#ffd58a", marginTop: ".2rem" }}
                     />
                     <span>
-                      I agree to the <a href="#">Terms</a> and <a className={s.regA} href="#">Privacy Policy</a>.
+                      I agree to the <a className={s.regA} href="#">Privacy Policy</a>.
                     </span>
                   </label>
                 </div>

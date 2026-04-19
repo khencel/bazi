@@ -236,6 +236,22 @@ footer {
   }
 }
 
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
+/* optional styling */
+footer {
+  margin-top: auto;
+  padding: 1rem 0;
+}
+
 @media (max-width: 575px){
   .brand{
     min-width: unset;

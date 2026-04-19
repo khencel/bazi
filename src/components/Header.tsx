@@ -4,6 +4,7 @@ import { useRouter, usePathname  } from "next/navigation";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { alertPopup } from "./Toaster";
+import Link from "next/link";
 
 export default function Header() {
     const router = useRouter();
@@ -73,10 +74,10 @@ export default function Header() {
                         {
                             !hasToken && (
                                 <>
-                                    <a href="#" onClick={() => goTo("/")}>Home</a>
-                                    <a href="#how" onClick={() => setMenuOpen(false)}>About Us</a>
-                                    <a href="#pricing" onClick={() => setMenuOpen(false)}>Data Privacy</a>
-                                    <a href="#faq" onClick={() => setMenuOpen(false)}>Copyright Notice</a>
+                                    <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
+                                    <Link href="/about" onClick={() => setMenuOpen(false)}>About Us</Link>
+                                    <Link href="/privacy" onClick={() => setMenuOpen(false)}>Data Privacy</Link>
+                                    <Link href="/copyright-notice" onClick={() => setMenuOpen(false)}>Copyright Notice</Link>
                                 </>
                             )
                         }

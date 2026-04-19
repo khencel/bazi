@@ -13,9 +13,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <Header />
-        <ReduxProvider>{children}</ReduxProvider>
-        <Footer />
+        <div className="wrapper">
+          <Header />
+          
+          <main className="content">
+            <ReduxProvider>{children}</ReduxProvider>
+          </main>
+
+          <Footer />
+        </div>
       </body>
     </html>
   );
