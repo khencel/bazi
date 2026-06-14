@@ -5,7 +5,7 @@ export const loginUser = createAsyncThunk(
     "auth/loginUser",
     async (payload: any, {rejectWithValue}) => {
         try{
-            const res = await post_no_auth_api(`${process.env.NEXT_PUBLIC_BASE_URL}api/user/login/`,payload)
+            const res = await post_no_auth_api(`${process.env.NEXT_PUBLIC_BASE_URL}api/auth-jwt/login`,payload)
             return res.data
         } catch (error){
             return rejectWithValue({
