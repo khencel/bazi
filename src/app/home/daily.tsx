@@ -29,7 +29,7 @@ export default function Daily({dailyData, natal_day, selectedGod, selectedMonth,
                     </div>
                 )}
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-12">
                         <div className={s["destiny-section"]}>
                             <div className={s["destiny-card"]} style={{padding:"5px"}}>
                                 <MonthTemplate 
