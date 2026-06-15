@@ -33,6 +33,10 @@ export default function MonthTemplate({monthData, natal_day,label, selectedGod}:
                         {monthData.map((card, index) => {
                             const god = convertInitailLetter(GetGods(natal_day[0], card?.day_chart?.stem?.value));
 
+                            if (selectedGod && god !== selectedGod) {
+                                return null;
+                            }
+
                             return (
                                 <article 
                                     key={index} 

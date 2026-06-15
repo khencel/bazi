@@ -33,6 +33,7 @@ export default function HomePage(){
     const [downloadLoading, setDownloadLoading] = useState(false) 
     const [isPlot, setIsPlot] = useState(false)
     const [selectedGod , setSelectedGod] = useState("")
+    const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
         const { name, value } = e.target;
@@ -314,7 +315,7 @@ export default function HomePage(){
                                                 <option value="">Selected God</option>
                                                 {   
                                                     
-                                                    GetAllGods().map((god, index) => (
+                                                    GetAllGods()?.map((god, index) => (
                                                         <option key={index} value={convertInitailLetter(god)}>{god}</option>
                                                     ))
                                                 }
@@ -422,7 +423,23 @@ export default function HomePage(){
             </div>
             {
                 outlook === "monthly" ? (
-                    <Monthly baziCardsFirst={baziCardsFirst} baziCardsSecond={baziCardsSecond} baziCardNext={baziCardNext} natal_day={natal_day}/>
+                    selectedMonth === null ? (
+                        <Monthly 
+                            baziCardsFirst={baziCardsFirst} 
+                            baziCardsSecond={baziCardsSecond} 
+                            baziCardNext={baziCardNext} 
+                            natal_day={natal_day}
+                            onSelectMonth={(month) => setSelectedMonth(month)}
+                        />
+                    ) : (
+                        <Daily 
+                            dailyData={dailyData} 
+                            natal_day={natal_day} 
+                            selectedGod={selectedGod}
+                            selectedMonth={selectedMonth}
+                            onBack={() => setSelectedMonth(null)}
+                        />
+                    )
                 ): (
                     <Daily dailyData={dailyData} natal_day={natal_day} selectedGod={selectedGod}/>
                 )
