@@ -46,10 +46,41 @@ export default function HomePage(){
     const isDisabled = !form.name || !form.gender || !form.dob;
 
     const handlePlot = async () => {
+        const resetAll = () => {
+            // UI states
+            setIsPlot(false);
+            setSelectedMonth(null);
+            setSelectedGod("");
+
+            // form fields reset
+            setForm({
+                name: "",
+                gender: "",
+                dob: "",
+                time: ""
+            });
+
+            // chart data reset
+            setDayMaster({});
+            setNatalHour([]);
+            setNatalDay([]);
+            setNatalMonth([]);
+            setNatalYear([]);
+
+            // extra data reset
+            setDailyData([]);
+        };
         try {
             setLoading(true);
 
+            // IF already plotted → RESET EVERYTHING
+            if (isPlot) {
+                resetAll();
+                return;
+            }
+
             const arr_date = form.dob.split("-");
+
             const payload = {
                 selectedDay: arr_date[2],
                 selectedMonth: arr_date[1],
@@ -69,9 +100,10 @@ export default function HomePage(){
             setNatalDay(day);
             setNatalMonth(month);
             setNatalYear(year);
+
+            setIsPlot(true);
         } finally {
             setLoading(false);
-            setIsPlot(true);
         }
     };
 
@@ -271,10 +303,13 @@ export default function HomePage(){
                                                     <span className={s["spinner"]}></span>
                                                     Plotting Destiny...
                                                 </span>
+                                            ) : isPlot ? (
+                                                "Plot another Bazi chart"
                                             ) : (
                                                 "Plot Bazi Chart"
                                             )}
                                         </button>
+                                        
                                     </div>
                                 
                                 

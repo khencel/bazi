@@ -49,7 +49,7 @@ export default function MonthTemplate({monthData, natal_day,label, selectedGod}:
                                         <div className={s["lp-date"]}>{index + 1}</div>
                                         <div className={s["lp-pill"]}>
                                             <span className={s["lp-ico"]}></span>
-                                            <span className={s["lp-code"]}>{god}</span>
+                                            <span className={s["lp-code"]}>{god=="SK"?"7K":god}</span>
                                         </div>
                                     </div>
 
