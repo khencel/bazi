@@ -9,7 +9,7 @@ import Daily from "./daily";
 import html2canvas from "html2canvas";
 import { GetAllGods } from "@/utils/getGod";
 import {convertInitailLetter} from "@/utils/convertData";
-
+import GodDescription from "@/components/GodDescription";
 
 export default function HomePage(){
     const dispatch = useDispatch<any>();
@@ -34,6 +34,7 @@ export default function HomePage(){
     const [isPlot, setIsPlot] = useState(false)
     const [selectedGod , setSelectedGod] = useState("")
     const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
+    const [godDesc, setGodDesc] = useState(false)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
         const { name, value } = e.target;
@@ -45,31 +46,34 @@ export default function HomePage(){
 
     const isDisabled = !form.name || !form.gender || !form.dob;
 
+
+    const resetAll = () => {
+        // UI states
+        setIsPlot(false);
+        setSelectedMonth(null);
+        setSelectedGod("");
+
+        // form fields reset
+        setForm({
+            name: "",
+            gender: "",
+            dob: "",
+            time: ""
+        });
+
+        // chart data reset
+        setDayMaster({});
+        setNatalHour([]);
+        setNatalDay([]);
+        setNatalMonth([]);
+        setNatalYear([]);
+
+        // extra data reset
+        setDailyData([]);
+        setGodDesc(false)
+    };
     const handlePlot = async () => {
-        const resetAll = () => {
-            // UI states
-            setIsPlot(false);
-            setSelectedMonth(null);
-            setSelectedGod("");
-
-            // form fields reset
-            setForm({
-                name: "",
-                gender: "",
-                dob: "",
-                time: ""
-            });
-
-            // chart data reset
-            setDayMaster({});
-            setNatalHour([]);
-            setNatalDay([]);
-            setNatalMonth([]);
-            setNatalYear([]);
-
-            // extra data reset
-            setDailyData([]);
-        };
+        
         try {
             setLoading(true);
 
@@ -102,6 +106,7 @@ export default function HomePage(){
             setNatalYear(year);
 
             setIsPlot(true);
+            setGodDesc(true)
         } finally {
             setLoading(false);
         }
@@ -368,7 +373,7 @@ export default function HomePage(){
                 </section>
             </div>
             <div className="col">
-                <section>
+                <section className="pb-0">
                     <div className={s["destiny-section"]}>
                         <div className={s["destiny-card"]}>
                             {loading ? (
@@ -455,6 +460,12 @@ export default function HomePage(){
                         </div>
                     </div>   
                 </section>
+                {
+                    selectedGod  && (
+                        <GodDescription selectedGod={selectedGod} />
+                    )
+                }
+                
             </div>
             {
                 outlook === "monthly" ? (

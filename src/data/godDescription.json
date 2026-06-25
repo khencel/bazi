@@ -1,0 +1,622 @@
+{
+  "IndirectWealth": {
+        "personality": [
+            "Risk-taking",
+            "Street-smart",
+            "Open-minded"
+        ],
+        "family": [
+            "A Man's Father",
+            "A Man's Girlfriend or Mistress",
+            "A Lady's Granddaughter"
+        ],
+        "people": [
+            "Entrepreneur",
+            "Investors",
+            "Business Owner"
+        ],
+        "career_works": [
+            "Marketing, Sales & Business Development",
+            "Investor",
+            "Entrepreneurship"
+        ],
+        "talents": [
+            "Managing Risks",
+            "Recognising Opportunities",
+            "Planning and Strategizing"
+        ],
+        "function": [
+            "Invest",
+            "Expand",
+            "Monetising"
+        ],
+        "activities": [
+            "Business Venture",
+            "Opportunities",
+            "Investing"
+        ],
+        "health": [
+            "Restlessness",
+            "Overindulgence",
+            "Stress"
+        ],
+        "money_matters": [
+            "Cashflow Issues",
+            "Investor's Funds",
+            "Equity Issues"
+        ],
+        "items": [
+            "Shares",
+            "Ownership",
+            "Other People's Talents"
+        ],
+        "places": [
+            "Bazaar",
+            "Central Business District"
+        ],
+        "disputes": [
+            "Big Scandals",
+            "Misappropriation of Funds",
+            "Illegal Acquisition"
+        ]
+    },
+    "Friend": {
+        "personality": [
+            "Self Esteem",
+            "Identity",
+            "Honour"
+        ],
+        "family": [
+            "A Man's Brother",
+            "A Lady's Sister",
+            "Cousins"
+        ],
+        "people": [
+            "Friends",
+            "Colleagues",
+            "Comrades"
+        ],
+        "career_works": [
+            "Social Networks / Media",
+            "Acting",
+            "Group Work"
+        ],
+        "talents": [
+            "Connecting People",
+            "Selling & Influencing",
+            "Managing Events & Teams"
+        ],
+        "function": [
+            "Connecting",
+            "Relating",
+            "Motivating"
+        ],
+        "activities": [
+            "Chatting",
+            "Making Friends",
+            "Team Building"
+        ],
+        "health": [
+            "Lymphatic System",
+            "Balancing",
+            "Nerves / Arteries"
+        ],
+        "money_matters": [
+            "IPO",
+            "Fund Raising",
+            "Profit Sharing"
+        ],
+        "items": [
+            "Personal Jewellery / Items",
+            "Favourite Clothing",
+            "Favourite Car / Item / Pet"
+        ],
+        "places": [
+            "Secret Societies / Clubs",
+            "Social Media",
+            "Professional Associates"
+        ],
+        "disputes": [
+            "Non-confrontational",
+            "Win-win",
+            "Witnesses"
+        ]
+    },
+    "Indirect_Resource": {
+        "personality": [
+            "Perceptive",
+            "Intuitive",
+            "Vigilant"
+        ],
+        "family": [
+            "A Lady's Mother",
+            "A Man's Paternal Grandfather",
+            "A Man's Father-in-law"
+        ],
+        "people": [
+            "Psychologist",
+            "Spiritual Teacher",
+            "Energy Healer"
+        ],
+        "career_works": [
+            "Spiritual Healing",
+            "Investigation",
+            "Invent & Innovate"
+        ],
+        "talents": [
+            "Intuition",
+            "Big Data",
+            "Spiritual Insight"
+        ],
+        "function": [
+            "Spiritual Healing",
+            "Emotional",
+            "Critical Thinking"
+        ],
+        "activities": [
+            "Inspiration",
+            "Spiritual",
+            "Trends & Patterns"
+        ],
+        "health": [
+            "Energy, Aura & Qi Related",
+            "Belief Systems",
+            "Emotional Issues"
+        ],
+        "money_matters": [
+            "Trust Fund",
+            "Long-term Investments",
+            "Mutual Funds"
+        ],
+        "items": [
+            "Luxury Items",
+            "Spiritual Scriptures",
+            "Meaningful Mementos"
+        ],
+        "places": [
+            "Sacred Places",
+            "Spas & Healing Centres",
+            "Meditation Room"
+        ],
+        "disputes": [
+            "Emotional Promises",
+            "Disillusioned",
+            "Jaded"
+        ]
+    },
+    "Eating_God": {
+        "personality": [
+            "Romantic",
+            "Creative",
+            "Artistic"
+        ],
+        "family": [
+            "A Lady's Daughter",
+            "A Man's Son-in-law",
+            "A Man's Maternal Grandfather"
+        ],
+        "people": [
+            "Chefs",
+            "Thinkers",
+            "Strategists"
+        ],
+        "career_works": [
+            "Fine & Creative Arts",
+            "Music & Entertainment",
+            "Innovation"
+        ],
+        "talents": [
+            "Invent & Create",
+            "Storytelling",
+            "Design"
+        ],
+        "function": [
+            "Tell a story",
+            "Devise a plan",
+            "Immerse in art"
+        ],
+        "activities": [
+            "Appreciating Art",
+            "Immerse in Music/Idea",
+            "Creation"
+        ],
+        "health": [
+            "Reproduction System Issues",
+            "Eating Disorder",
+            "Urinary System Problem"
+        ],
+        "money_matters": [
+            "Process Over Outcome",
+            "Values Idea",
+            "Values Experience"
+        ],
+        "items": [
+            "Jewellery",
+            "Artistic Works",
+            "Delicious Food"
+        ],
+        "places": [
+            "Art studio & Film Set",
+            "Museums & Monuments",
+            "Historical Buildings"
+        ],
+        "disputes": [
+            "Obsessed with an Idea",
+            "Biasness",
+            "Fetish & Weird Desires"
+        ]
+    },
+    "Direct_Wealth": {
+        "personality": [
+            "Straightforward",
+            "Open-minded",
+            "Tactful"
+        ],
+        "family": [
+            "Wife",
+            "A Lady's Father",
+            "A Lady's Grandson"
+        ],
+        "people": [
+            "Manager",
+            "Businessman",
+            "Accountant"
+        ],
+        "career_works": [
+            "Business Management",
+            "Bankers",
+            "Fund Manager"
+        ],
+        "talents": [
+            "Managing Risks",
+            "Managing Projects",
+            "Operations"
+        ],
+        "function": [
+            "Control",
+            "Manage",
+            "Change"
+        ],
+        "activities": [
+            "Making Deals",
+            "Setting Visions",
+            "Guiding Others"
+        ],
+        "health": [
+            "Fatigue",
+            "Diet Issues",
+            "Insomnia"
+        ],
+        "money_matters": [
+            "Profit-driven",
+            "Residual Income",
+            "Financial Literacy"
+        ],
+        "items": [
+            "Expensive Items",
+            "Project-Related Items",
+            "Assets"
+        ],
+        "places": [
+            "Business Centres",
+            "Stock Exchanges",
+            "Banks"
+        ],
+        "disputes": [
+            "Commission Disputes",
+            "Embezzlements",
+            "Financial Fraud"
+        ]
+    },
+    "Direct_Officer": {
+        "personality": [
+            "Prim & Proper",
+            "Good Manners",
+            "Respectful"
+        ],
+        "family": [
+            "A Man's Daughter",
+            "A Woman's Husband",
+            "Maternal Grandmother"
+        ],
+        "people": [
+            "Boss",
+            "Officer",
+            "Person in Charge"
+        ],
+        "career_works": [
+            "Engineer",
+            "C Ranking Officer",
+            "Regulated Environment"
+        ],
+        "talents": [
+            "Fix & Improve",
+            "Systematic & Organised",
+            "Rule Follower"
+        ],
+        "function": [
+            "Govern",
+            "Organise",
+            "Chaos"
+        ],
+        "activities": [
+            "Recognition",
+            "To Systematise",
+            "To Organise"
+        ],
+        "health": [
+            "Eating Disorder",
+            "Overly Strict Diets",
+            "Compromised Lifestyle"
+        ],
+        "money_matters": [
+            "Saving & Protection Plans",
+            "Retirement Plans",
+            "Loans"
+        ],
+        "items": [
+            "S.O.P / Rule Book",
+            "Bible",
+            "Awards & Titles"
+        ],
+        "places": [
+            "Police Station",
+            "Court",
+            "Factory"
+        ],
+        "disputes": [
+            "Non-compliance",
+            "Licensing / Permit Issues",
+            "Approvals & Grants"
+        ]
+    },
+    "Direct_Resource": {
+        "personality": [
+            "Knowledgeable",
+            "Elegant",
+            "Dependable"
+        ],
+        "family": [
+            "A Man's Mother",
+            "A Lady's Paternal Grandfather",
+            "A Lady's Grandson"
+        ],
+        "people": [
+            "Teacher",
+            "Doctor",
+            "Mentor"
+        ],
+        "career_works": [
+            "Teaching",
+            "Research & Analysis",
+            "Economics"
+        ],
+        "talents": [
+            "Counselling",
+            "Healing",
+            "Educating"
+        ],
+        "function": [
+            "Enhance",
+            "Improve",
+            "Seek Knowledge"
+        ],
+        "activities": [
+            "Enjoy",
+            "Learning",
+            "Healing"
+        ],
+        "health": [
+            "Mental Issues",
+            "Respiratory & Lungs",
+            "Auto Immune"
+        ],
+        "money_matters": [
+            "Financial Planning",
+            "Inheritance",
+            "Insurance"
+        ],
+        "items": [
+            "Documents / Books",
+            "Tech",
+            "Life Support"
+        ],
+        "places": [
+            "Holiday Places",
+            "Hospital",
+            "Bedroom"
+        ],
+        "disputes": [
+            "Technical Disputes",
+            "Broken Promises",
+            "Written Argument"
+        ]
+    },
+    "Rob_Wealth": {
+        "personality": [
+            "Charismatic",
+            "Adaptive",
+            "Proactive"
+        ],
+        "family": [
+            "A Man's Sister",
+            "A Lady's Brother",
+            "A Man's Daughter-in-law"
+        ],
+        "people": [
+            "Rivals",
+            "Partners",
+            "Teammates"
+        ],
+        "career_works": [
+            "Entertainment",
+            "Public Relations",
+            "Deal Maker"
+        ],
+        "talents": [
+            "Persuasive",
+            "Motivating & Rallying",
+            "Entertaining"
+        ],
+        "function": [
+            "Teamwork",
+            "Gathering",
+            "Entertainment"
+        ],
+        "activities": [
+            "Networking",
+            "Team Sports",
+            "Business Partnership"
+        ],
+        "health": [
+            "Long Term Illness",
+            "Lack of Stamina",
+            "Limbs Problem"
+        ],
+        "money_matters": [
+            "Lack of Financial Management",
+            "Miscalculation",
+            "Likes to Borrow"
+        ],
+        "items": [
+            "Event Tickets",
+            "Sports Items",
+            "High Maintenance Items"
+        ],
+        "places": [
+            "Clubs",
+            "Stadiums",
+            "Shopping Malls"
+        ],
+        "disputes": [
+            "Conflicts Arising from Ego",
+            "Lies & Deceit",
+            "Overpromise, Under Deliver"
+        ]
+    },
+    "Hurting_Officer": {
+        "personality": [
+            "Spontaneous",
+            "Charming",
+            "Street-smart"
+        ],
+        "family": [
+            "A Lady's Son",
+            "A Man's Paternal Grandmother",
+            "A Lady's Maternal Grandfather"
+        ],
+        "people": [
+            "Stars",
+            "Performers",
+            "Activists"
+        ],
+        "career_works": [
+            "Working Hard",
+            "Delivering Results",
+            "Inspiring Others"
+        ],
+        "talents": [
+            "Showmanship",
+            "Grabbing Attention",
+            "Likeability"
+        ],
+        "function": [
+            "Expression",
+            "Create",
+            "Shows Off"
+        ],
+        "activities": [
+            "Presenting & Performing",
+            "Debating / Speaking / Singing",
+            "Launching"
+        ],
+        "health": [
+            "Overindulgence",
+            "Speech Disorder",
+            "ENT"
+        ],
+        "money_matters": [
+            "Overspend",
+            "Materialistic",
+            "Lavish Lifestyle"
+        ],
+        "items": [
+            "Microphone",
+            "Make Up",
+            "Branded Items"
+        ],
+        "places": [
+            "Concert Halls",
+            "Noisy Places",
+            "Fashion Runway"
+        ],
+        "disputes": [
+            "Making Unsubstantiated Claims",
+            "Highly Critical of Others",
+            "The Need to be Right"
+        ]
+    },
+    "Seven_Killing": {
+        "personality": [
+            "Demanding & Assertive",
+            "Strong Endurance & Energy",
+            "Aggressive & Impatient"
+        ],
+        "family": [
+            "A Man's Son",
+            "A Lady's Lover",
+            "A Lady's Grandmother"
+        ],
+        "people": [
+            "Petty People",
+            "Enemies & Rivals",
+            "Fighters"
+        ],
+        "career_works": [
+            "Extreme Sports",
+            "High Risk Work",
+            "Athletes"
+        ],
+        "talents": [
+            "Fast-Thinker",
+            "Charismatic",
+            "Adaptable"
+        ],
+        "function": [
+            "Problem Solving",
+            "Attack",
+            "Manipulate"
+        ],
+        "activities": [
+            "High Risk Activities",
+            "Pain",
+            "Compete Gambling"
+        ],
+        "health": [
+            "Accident",
+            "Bleeding",
+            "Intense Pain"
+        ],
+        "money_matters": [
+            "Debt",
+            "Robbery / Theft",
+            "All or Nothing"
+        ],
+        "items": [
+            "Alcohol",
+            "Weapons",
+            "Dangerous / Hazardous Items"
+        ],
+        "places": [
+            "War Zone",
+            "Casino",
+            "Red Light Districts"
+        ],
+        "disputes": [
+            "Vengeance",
+            "Illegal Activities",
+            "Unconventional Methods"
+        ]
+    }
+    
+}
