@@ -2,7 +2,7 @@
 
 import s from "../../../public/css/home.module.css"
 import {useEffect, useState } from "react";
-import { fetchBazi, fetchMonthly, fetchDaily } from "@/redux/slices/bazi/baziThunk";
+import { fetchBazi, fetchMonthly, fetchDaily, deleteDiary } from "@/redux/slices/bazi/baziThunk";
 import { useDispatch } from "react-redux";
 import Monthly from "@/app/home/monthly";
 import Daily from "@/app/home/daily";
@@ -10,6 +10,9 @@ import html2canvas from "html2canvas";
 import { GetAllGods } from "@/utils/getGod";
 import {convertInitailLetter} from "@/utils/convertData";
 import GodDescription from "@/components/GodDescription";
+import { fetchAllDiary } from "@/redux/slices/bazi/baziThunk";
+import Cookies from "js-cookie";
+import { alertPopup } from "@/components/Toaster";
 
 export default function AllChart(){
     const dispatch = useDispatch<any>();
@@ -19,7 +22,7 @@ export default function AllChart(){
         dob: "",
         time: ""
     });
-    const [outlook, setOutlook] = useState<any>("")
+    const [outlook, setOutlook] = useState<any>("monthly")
     const [dayMaster, setDayMaster] = useState<any>({})
     const [baziCardsFirst, setBaziCardsFirst] = useState<any[]>([])
     const [baziCardsSecond, setBaziCardsSecond] = useState<any[]>([])
@@ -35,25 +38,29 @@ export default function AllChart(){
     const [selectedGod , setSelectedGod] = useState("")
     const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
     const [godDesc, setGodDesc] = useState(false)
+    const [diary, setDiary] = useState<any[]>([])
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
-        const { name, value } = e.target;
-        setForm(prev => ({
-        ...prev,
-        [name]: value
-        }));
-    }
+    // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
+    //     const { name, value } = e.target;
+    //     setForm(prev => ({
+    //     ...prev,
+    //     [name]: value
+    //     }));
+    // }
 
     const isDisabled = !form.name || !form.gender || !form.dob;
     
-    const handleGetData = async () => {
+    const handleGetData = async (data:any) => {
+        
+        const itemDiary = JSON.parse(data);
+        
         setOutlook("monthly")
-        setSelectedGod("IW")
+        
         const payload = {
-            selectedDay: "10",
-            selectedMonth: "03",
-            selectedTime: 14,
-            selectedYear: "1992",
+            selectedDay: itemDiary.selectedDay,
+            selectedMonth: itemDiary.selectedMonth,
+            selectedTime: itemDiary.selectedTime,
+            selectedYear: itemDiary.selectedYear,
         };
         setForm(prev => ({ ...prev, time: "14" }));
 
@@ -158,21 +165,53 @@ export default function AllChart(){
     const handleChangeGod = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
         setSelectedGod(value);
-        console.log(value);
+    }
+
+    const handleDelete = (id:number) => {
+        alertPopup({
+            title: "Delete?",
+            text: "Are you sure you want to delete this record?",
+            confirmText: "Yes, Delete",
+            onConfirm: async () => {
+                await dispatch(deleteDiary(id)).unwrap(); 
+                await loadData();
+            }
+        });
     }
 
     
+    const loadData = async () => {
+        const currentYear = new Date().getFullYear();
 
+        try {
+            const monthlyRes: any = await dispatch(fetchMonthly(currentYear));
+
+            setBaziCardsFirst(monthlyRes.payload.first);
+            setBaziCardsSecond(monthlyRes.payload.second);
+            setBaziCardNext(monthlyRes.payload.nextYear);
+
+            const user = Cookies.get("user");
+            let userData: any = null;
+
+            if (user) {
+                userData = JSON.parse(user);
+            }
+
+            if (userData?.id) {
+                const diaryRes: any = await dispatch(fetchAllDiary(userData.id));
+                setDiary(diaryRes.payload);
+            } else {
+                setDiary([]);
+            }
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     useEffect(() => {
-        const currentYear = new Date().getFullYear();
-        dispatch(fetchMonthly(currentYear)).then((res: any) => {
-            setBaziCardsFirst(res.payload.first)
-            setBaziCardsSecond(res.payload.second)
-            setBaziCardNext(res.payload.nextYear)
-        })
-       
-    },[dispatch,])
+        loadData();
+    }, [dispatch]);
 
     useEffect(() => {
         const currentYear = new Date().getFullYear();
@@ -192,9 +231,65 @@ export default function AllChart(){
                             
                             {/* <div className={s["destiny-grid"]}> */}
 
-                                <button onClick={handleGetData}>
+                                {/* <button onClick={handleGetData}>
                                     Sample Data
-                                </button>
+                                </button> */}
+                                <div className="row">
+                                    <div className="col" style={{maxHeight:"300px",overflow:"auto"}}>
+                                            <table className="table table-dark" style={{ backgroundColor: "transparent", fontSize:"12px" }} >
+                                                <thead >
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Gender</th>
+                                                        <th>Date of Birth</th>
+                                                        <th>Time of Birth</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {diary?.length > 0 ? (
+                                                        diary.map((item, index) => (
+                                                        <tr key={index}>
+                                                            <td className="text-capitalize">{item.name}</td>
+                                                            <td className="text-capitalize">{item.gender}</td>
+                                                            <td>
+                                                            {new Date(item.date_of_birth).toLocaleDateString("en-US", {
+                                                                month: "long",
+                                                                day: "numeric",
+                                                                year: "numeric",
+                                                            })}
+                                                            </td>
+                                                            <td>{item.time_of_birth}</td>
+                                                            <td>
+                                                            <span
+                                                                className="badge bg-success"
+                                                                style={{ cursor: "pointer" }}
+                                                                onClick={() => handleGetData(item.bazi_info)}
+                                                            >
+                                                                View
+                                                            </span>
+                                                            <span
+                                                                className="badge bg-danger ms-1"
+                                                                style={{ cursor: "pointer" }}
+                                                                onClick={() => handleDelete(item.id)}
+                                                            >
+                                                                Delete
+                                                            </span>
+                                                            </td>
+                                                        </tr>
+                                                        ))
+                                                    ) : (
+                                                        <tr>
+                                                        <td colSpan={5} className="text-center text-secondary py-4">
+                                                            No records found.
+                                                        </td>
+                                                        </tr>
+                                                    )}
+                                                    </tbody>
+                                            </table>
+                                    </div>
+                                </div>
+                                
                                 <div className="row mt-3 mb-3">
                                     <div className="col">
                                         <div className={s["destiny-field"]}>
@@ -209,8 +304,30 @@ export default function AllChart(){
                                             </select>
                                         </div>
                                     </div>
+                                    <div className="col">
+                                        
+                                        <div className={s["destiny-field"]}>
+                                            <label>The 10 Gods</label>
+                                            <select
+                                                name="gods"
+                                                value={selectedGod}
+                                                onChange={handleChangeGod}
+                                            >
+                                                <option value="">Selected God</option>
+                                                {   
+                                                    
+                                                    GetAllGods()?.map((god, index) => (
+                                                        <option key={index} value={convertInitailLetter(god)}>{god}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+                                    
+                                    </div>
                                 </div>
-                                <div className="row mb-3">
+
+                    
+                                <div className="row mb-3 mt-3">
                                     <div className="col-md-6">
                                         {/* Button */}
                                         {/* <button
@@ -233,51 +350,28 @@ export default function AllChart(){
                                     </div>
                                 
                                 
-                                {
-                                    isPlot && (
-                                        <div className="col-md-6">
-                                            <button
-                                                className={`${s["plot-btn"]}`}
-                                                // disabled={isDisabled}
-                                                onClick={handleDownloadImage}
-                                            >
-                                                {
-                                                    downloadLoading ? (
-                                                        <span className={s["btn-loading"]}>
-                                                        <span className={s["spinner"]}></span>
-                                                        Downloading...
-                                                    </span>
-                                                    ):(
-                                                        "Download Result"
-                                                    )
-                                                }
-                                            </button>
-                                        </div>
-                                    )
-                                }
-                                </div>
-                                <div className="row">
-                                    <div className="col">
-                                        
-                                        <div className={s["destiny-field"]}>
-                                            <label>The 10 Gods</label>
-                                            <select
-                                                name="gods"
-                                                value={selectedGod}
-                                                onChange={handleChangeGod}
-                                            >
-                                                <option value="">Selected God</option>
-                                                {   
-                                                    
-                                                    GetAllGods()?.map((god, index) => (
-                                                        <option key={index} value={convertInitailLetter(god)}>{god}</option>
-                                                    ))
-                                                }
-                                            </select>
-                                        </div>
-                                    
+                                
+                                    <div className="col-md-6">
+                                        <button
+                                            className={`${s["plot-btn"]}`}
+                                            // disabled={isDisabled}
+                                            onClick={handleDownloadImage}
+                                        >
+                                            {
+                                                downloadLoading ? (
+                                                    <span className={s["btn-loading"]}>
+                                                    <span className={s["spinner"]}></span>
+                                                    Downloading...
+                                                </span>
+                                                ):(
+                                                    "Download Result"
+                                                )
+                                            }
+                                        </button>
                                     </div>
+                               
                                 </div>
+                                
                                 
                                
                             {/* </div> */}

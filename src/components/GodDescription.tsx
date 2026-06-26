@@ -21,8 +21,6 @@ export default function GodDescription({selectedGod}:GodDescroptionProps){
        
     } as const;
     const god = godMap[selectedGod as keyof typeof godMap];
-
-    console.log(god);
     
     return(
         <>

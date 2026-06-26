@@ -10,6 +10,10 @@ export async function get_no_auth_api(url: string){
     return axios.get(url);
 }
 
+export async function delete_no_auth_api(url: string){
+    return axios.delete(url);
+}
+
 
 export async function standard_post_api(url: string, data: any){
     const token = Cookies.get("access");
