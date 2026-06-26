@@ -4,14 +4,14 @@ import s from "../../../public/css/home.module.css"
 import {useEffect, useState } from "react";
 import { fetchBazi, fetchMonthly, fetchDaily } from "@/redux/slices/bazi/baziThunk";
 import { useDispatch } from "react-redux";
-import Monthly from "./monthly";
-import Daily from "./daily";
+import Monthly from "@/app/home/monthly";
+import Daily from "@/app/home/daily";
 import html2canvas from "html2canvas";
 import { GetAllGods } from "@/utils/getGod";
 import {convertInitailLetter} from "@/utils/convertData";
 import GodDescription from "@/components/GodDescription";
 
-export default function HomePage(){
+export default function AllChart(){
     const dispatch = useDispatch<any>();
     const [form, setForm] = useState({
         name: "",
@@ -19,7 +19,7 @@ export default function HomePage(){
         dob: "",
         time: ""
     });
-    const [outlook, setOutlook] = useState("monthly")
+    const [outlook, setOutlook] = useState<any>("")
     const [dayMaster, setDayMaster] = useState<any>({})
     const [baziCardsFirst, setBaziCardsFirst] = useState<any[]>([])
     const [baziCardsSecond, setBaziCardsSecond] = useState<any[]>([])
@@ -31,7 +31,7 @@ export default function HomePage(){
     const [dailyData, setDailyData] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
     const [downloadLoading, setDownloadLoading] = useState(false) 
-    const [isPlot, setIsPlot] = useState(false)
+    const [isPlot, setIsPlot] = useState(true)
     const [selectedGod , setSelectedGod] = useState("")
     const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
     const [godDesc, setGodDesc] = useState(false)
@@ -45,51 +45,20 @@ export default function HomePage(){
     }
 
     const isDisabled = !form.name || !form.gender || !form.dob;
-
-
-    const resetAll = () => {
-        setIsPlot(false);
-        setSelectedMonth(null);
-        setSelectedGod("");
-
-        setForm({
-            name: "",
-            gender: "",
-            dob: "",
-            time: ""
-        });
-
-        setDayMaster({});
-        setNatalHour([]);
-        setNatalDay([]);
-        setNatalMonth([]);
-        setNatalYear([]);
-
-        // REMOVE THIS
-        // setDailyData([]);
-
-        setGodDesc(false);
+    
+    const handleGetData = async () => {
         setOutlook("monthly")
-    };
-    const handlePlot = async () => {
-        
+        setSelectedGod("IW")
+        const payload = {
+            selectedDay: "10",
+            selectedMonth: "03",
+            selectedTime: 14,
+            selectedYear: "1992",
+        };
+        setForm(prev => ({ ...prev, time: "14" }));
+
         try {
             setLoading(true);
-
-            // IF already plotted → RESET EVERYTHING
-            if (isPlot) {
-                resetAll();
-                return;
-            }
-
-            const arr_date = form.dob.split("-");
-
-            const payload = {
-                selectedDay: arr_date[2],
-                selectedMonth: arr_date[1],
-                selectedTime: form.time ? Number(form.time.split(":")[0]) : 0,
-                selectedYear: arr_date[0],
-            };
 
             const res: any = await dispatch(fetchBazi(payload));
 
@@ -109,7 +78,8 @@ export default function HomePage(){
         } finally {
             setLoading(false);
         }
-    };
+        
+    }
 
     const handleDownloadImage = async () => {
         try {
@@ -191,6 +161,8 @@ export default function HomePage(){
         console.log(value);
     }
 
+    
+
 
     useEffect(() => {
         const currentYear = new Date().getFullYear();
@@ -220,64 +192,9 @@ export default function HomePage(){
                             
                             {/* <div className={s["destiny-grid"]}> */}
 
-                                <div className="row">
-                                    <div className="col">
-                                        <div className={s["destiny-field"]}>
-                                            <label>Name</label>
-                                            <input
-                                                type="text"
-                                                name="name"
-                                                placeholder="Enter your name"
-                                                value={form.name}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="col">
-                                        {/* Gender */}
-                                        <div className={s["destiny-field"]}>
-                                            <label>Gender</label>
-                                            <select
-                                                name="gender"
-                                                value={form.gender}
-                                                onChange={handleChange}
-                                            >
-                                                <option value="">Select gender</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div className="row mt-3">
-                                    <div className="col-12 col-md-6">
-                                        <div className={s["destiny-field"]}>
-                                            <label htmlFor="dob">Date of Birth</label>
-                                            <input
-                                                id="dob"
-                                                type="date"
-                                                name="dob"
-                                                value={form.dob}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="col-12 col-md-6 mt-3 mt-md-0">
-                                        <div className={s["destiny-field"]}>
-                                            <label htmlFor="time">Time of Birth</label>
-                                            <input
-                                                id="time"
-                                                type="time"
-                                                name="time"
-                                                value={form.time}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <button onClick={handleGetData}>
+                                    Sample Data
+                                </button>
                                 <div className="row mt-3 mb-3">
                                     <div className="col">
                                         <div className={s["destiny-field"]}>
@@ -286,7 +203,6 @@ export default function HomePage(){
                                                 name="outlook"
                                                 value={outlook}
                                                 onChange={(e)=>setOutlook(e.target.value)}
-                                                disabled={isDisabled || loading}
                                             >
                                                 <option value="monthly">Monthly</option>
                                                 <option value="daily">Daily</option>
@@ -297,7 +213,7 @@ export default function HomePage(){
                                 <div className="row mb-3">
                                     <div className="col-md-6">
                                         {/* Button */}
-                                        <button
+                                        {/* <button
                                             className={`${s["plot-btn"]} ${loading ? s["loading-btn"] : ""}`}
                                             disabled={isDisabled || loading}
                                             onClick={handlePlot}
@@ -312,7 +228,7 @@ export default function HomePage(){
                                             ) : (
                                                 "Plot Bazi Chart"
                                             )}
-                                        </button>
+                                        </button> */}
                                         
                                     </div>
                                 
@@ -322,7 +238,7 @@ export default function HomePage(){
                                         <div className="col-md-6">
                                             <button
                                                 className={`${s["plot-btn"]}`}
-                                                disabled={isDisabled}
+                                                // disabled={isDisabled}
                                                 onClick={handleDownloadImage}
                                             >
                                                 {
@@ -349,7 +265,6 @@ export default function HomePage(){
                                                 name="gods"
                                                 value={selectedGod}
                                                 onChange={handleChangeGod}
-                                                disabled={isDisabled || loading}
                                             >
                                                 <option value="">Selected God</option>
                                                 {   

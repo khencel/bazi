@@ -85,6 +85,8 @@ export default function Header() {
                         <div className="navcta">
                             {hasToken ? (
                                 <>
+                                    <Link href="/home" onClick={() => setMenuOpen(false)}>Home</Link>
+                                    <Link href="/all-chart" onClick={() => setMenuOpen(false)}>Diary</Link>
                                     <a href="#" className="text-capitalize" onClick={() => goTo("/home")}>{user.first_name} {user.last_name}</a>
                                     <button
                                         className="btn primary"
