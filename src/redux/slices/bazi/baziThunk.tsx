@@ -37,6 +37,19 @@ export const fetchDaily = createAsyncThunk(
     }
 )
 
+export const createDiary = createAsyncThunk(
+    "bazi/createDiary",
+    async (data: any, {rejectWithValue}) => {
+        try {
+            const res = await post_no_auth_api(`${process.env.NEXT_PUBLIC_FORECAST_URL}api/bazi/create`,data)
+            return res.data
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+)
+
+
 export const fetchAllDiary = createAsyncThunk(
     "bazi/fetchAllDiary",
     async (user: number, {rejectWithValue}) => {

@@ -2,7 +2,7 @@
 
 import s from "../../../public/css/home.module.css"
 import {useEffect, useState } from "react";
-import { fetchBazi, fetchMonthly, fetchDaily } from "@/redux/slices/bazi/baziThunk";
+import { fetchBazi, fetchMonthly, fetchDaily, createDiary } from "@/redux/slices/bazi/baziThunk";
 import { useDispatch } from "react-redux";
 import Monthly from "./monthly";
 import Daily from "./daily";
@@ -10,6 +10,8 @@ import html2canvas from "html2canvas";
 import { GetAllGods } from "@/utils/getGod";
 import {convertInitailLetter} from "@/utils/convertData";
 import GodDescription from "@/components/GodDescription";
+import Cookies from "js-cookie";
+import { alertPopup } from "@/components/Toaster";
 
 export default function HomePage(){
     const dispatch = useDispatch<any>();
@@ -191,6 +193,49 @@ export default function HomePage(){
         console.log(value);
     }
 
+    const handleSave = () => {
+        alertPopup({
+            title: "Create?",
+            text: "Are you sure you want to Create this record?",
+            confirmText: "Yes, Create",
+            onConfirm: async () => {
+                await handleStore() 
+                
+            }
+        });
+    }
+
+    const handleStore = async () => {
+        const arr_date = form.dob.split("-");
+        const user = Cookies.get("user");
+        let userData: any = null;
+
+        if (user) {
+            userData = JSON.parse(user);
+        }
+
+        const bazi_info = {
+            selectedDay: arr_date[2],
+            selectedMonth: arr_date[1],
+            selectedTime: form.time ? Number(form.time.split(":")[0]) : 0,
+            selectedYear: arr_date[0],
+            actualTime: form.time
+        };
+
+        const payload = {
+            bazi_info:bazi_info,
+            name:form.name,
+            gender:form.gender,
+            date_of_birth:form.dob,
+            time_of_birth:form.time ? Number(form.time.split(":")[0]) : 0,
+            user_id:userData.id
+        }
+
+        const res = await dispatch(createDiary(payload))
+        console.log(payload);
+        
+    }
+
 
     useEffect(() => {
         const currentYear = new Date().getFullYear();
@@ -293,6 +338,29 @@ export default function HomePage(){
                                             </select>
                                         </div>
                                     </div>
+                                    
+                                    <div className="col">
+                                        
+                                        <div className={s["destiny-field"]}>
+                                            <label>The 10 Gods</label>
+                                            <select
+                                                name="gods"
+                                                value={selectedGod}
+                                                onChange={handleChangeGod}
+                                                disabled={isDisabled || loading}
+                                            >
+                                                <option value="">Selected God</option>
+                                                {   
+                                                    
+                                                    GetAllGods()?.map((god, index) => (
+                                                        <option key={index} value={convertInitailLetter(god)}>{god}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+                                    
+                                    </div>
+                                
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-md-6">
@@ -340,29 +408,22 @@ export default function HomePage(){
                                     )
                                 }
                                 </div>
-                                <div className="row">
-                                    <div className="col">
-                                        
-                                        <div className={s["destiny-field"]}>
-                                            <label>The 10 Gods</label>
-                                            <select
-                                                name="gods"
-                                                value={selectedGod}
-                                                onChange={handleChangeGod}
-                                                disabled={isDisabled || loading}
-                                            >
-                                                <option value="">Selected God</option>
-                                                {   
-                                                    
-                                                    GetAllGods()?.map((god, index) => (
-                                                        <option key={index} value={convertInitailLetter(god)}>{god}</option>
-                                                    ))
-                                                }
-                                            </select>
+
+                                {
+                                    isPlot && (
+                                        <div className="row">
+                                            <div className="col">
+                                                <button
+                                                    className={`${s["plot-btn"]}`}   
+                                                    onClick={handleSave}
+                                                >
+                                                    Save Result
+                                                </button>
+                                            </div>
                                         </div>
-                                    
-                                    </div>
-                                </div>
+                                    )
+                                }
+                                
                                 
                                
                             {/* </div> */}
