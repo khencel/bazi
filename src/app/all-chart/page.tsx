@@ -259,7 +259,7 @@ export default function AllChart(){
                                                                 year: "numeric",
                                                             })}
                                                             </td>
-                                                            <td>{item.time_of_birth}</td>
+                                                            <td>{JSON.parse(item.bazi_info).actualTime}</td>
                                                             <td>
                                                             <span
                                                                 className="badge bg-success"
